@@ -13,16 +13,24 @@ Usage:
                                           [-m <mintime>] [-d <subdir>] \
                                           [-r] [-v] [-s] [-o]
 Where:
-  <share_path>                   Required. Location of the root directory of the share to take a snapshot of.
+  <share_path>                   Required. Location of the root directory of the share to
+                                 take a snapshot of.
   -r                             Create a read-only snapshot. Default off
   -v                             Verbose output
-  -o                             Only if new. Skips snapshot creation of no files have changed since the last time this tag was snapshotted
+  -o                             Only if new. Skips snapshot creation of no files have
+                                 changed since the last time this tag was snapshotted
   -h                             Display this message
-  -s                             Safe mode. Used with -v this lets you check parameters and the actions that will be taken but doesn't create or delete any snapshots.
-  -t <tag_name>                  An optional tag to pre-append to the directory name of the snapshot.
-  -c <count>                     The number of snapshots to keep. This is filtered by tag. Default: 0. Use 0 to disable counting
-  -m <mintime>                   The minimum time in seconds that snapshots with the same tag can be taken. Default: 0. Use 0 to disable
-  -d <destination-subdirectory>  The sub-directory, level with the shared directory, that holds snapshots. Default: .snapshots
+  -s                             Safe mode. Used with -v this lets you check parameters
+                                 and the actions that will be taken but doesn't create
+                                 or delete any snapshots.
+  -t <tag_name>                  An optional tag to pre-append to the directory name
+                                 of the snapshot.
+  -c <count>                     The number of snapshots to keep. This is filtered by tag.
+                                 Default: 0. Use 0 to disable counting
+  -m <mintime>                   The minimum time in seconds that snapshots with the same
+                                 tag can be taken. Default: 0. Use 0 to disable
+  -d <destination-subdirectory>  The sub-directory, level with the shared directory, that
+                                 holds snapshots. Default: .snapshots
 
 The script to take the snapshots is btrfs-share-snap.sh. The default location for snapshots is in a directory at the same level as the sub-volumes (the default is .snapshots which can be changed on the command line.)
 ```
