@@ -7,6 +7,7 @@ As I finally got this working in the end I thought I'd share it to help save som
 
 ## The script usage
 
+```
 Usage:
     sudo btrfs-share-snap.sh <share_path> [-t <tag>] [-c <count>] \
                                           [-m <mintime>] [-d <subdir>] \
@@ -24,6 +25,7 @@ Where:
   -d <destination-subdirectory>  The sub-directory, level with the shared directory, that holds snapshots. Default: .snapshots
 
 The script to take the snapshots is btrfs-share-snap.sh. The default location for snapshots is in a directory at the same level as the sub-volumes (the default is .snapshots which can be changed on the command line.)
+```
 
 ## Typical disk directory structure
 
