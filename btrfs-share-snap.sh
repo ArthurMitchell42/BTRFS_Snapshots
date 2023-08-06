@@ -183,10 +183,10 @@ function btrfs-snp()
     echo "Pruning $(( ${#SNAPS[@]} - COUNT )) old snapshots..." && \
     for (( i=0; i <= $(( ${#SNAPS[@]} - COUNT - 1 )); i++ )); do
       [[ $VERBOSE ]] && {
-        echo "   Deleting" $SNAPSHOT_LOCATION${SNAPS[$i]}
+        echo "   Deleting" ${SNAPS[$i]}
         }
       [[ ! $SAFE_MODE ]] && {
-        btrfs subvolume delete "$SNAPSHOT_LOCATION${SNAPS[$i]}" || return 1
+        btrfs subvolume delete "${SNAPS[$i]}" || return 1
         }
     done
 
