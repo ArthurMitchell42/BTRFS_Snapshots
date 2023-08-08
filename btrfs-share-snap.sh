@@ -79,7 +79,7 @@ function btrfs-snp()
     echo "Parameters in use:"
     echo "  Share path" $SHARE_PATH
     echo "  Share name" $SHARE_NAME
-    echo "  Share mount point" $MOUNT_POINT
+    echo "  Mount point" $MOUNT_POINT
     echo "  Snapshot location" $SNAPSHOT_LOCATION
     echo "  Snapshot name" $SNAPSHOT_NAME
     echo "  Snapshot path" $SNAPSHOT_PATH
@@ -121,7 +121,7 @@ function btrfs-snp()
   # Count the number of snapshots below the snapshot directory
   if [ $TAG ]
   then
-    local SNAPS=( $( btrfs subvolume list -s --sort=gen "$SNAPSHOT_LOCATION" | awk '{ print $14 }' | grep "^${TAG}" | grep "$DEST_PATH/$SHARE_NAME") )
+    local SNAPS=( $( btrfs subvolume list -s --sort=gen "$SNAPSHOT_LOCATION" | awk '{ print $14 }' | grep "${TAG}" | grep "$DEST_PATH/$SHARE_NAME") )
   else
     local SNAPS=( $( btrfs subvolume list -s --sort=gen "$SNAPSHOT_LOCATION" | awk '{ print $14 }' | grep "^GMT-" | grep "$DEST_PATH/$SHARE_NAME" ) )
   fi
@@ -178,15 +178,15 @@ function btrfs-snp()
       }
   fi
 
-  # Prune older backups
+  # Prune older snapshots
   [[ "$COUNT" != 0 ]] && [[ ${#SNAPS[@]} -ge $COUNT ]] && \
-    echo "Pruning $(( ${#SNAPS[@]} - COUNT )) old snapshots..." && \
-    for (( i=0; i <= $(( ${#SNAPS[@]} - COUNT - 1 )); i++ )); do
+    echo "Pruning $(( ${#SNAPS[@]} - COUNT + 1)) old snapshots..." && \
+    for (( i=0; i <= $(( ${#SNAPS[@]} - COUNT )); i++ )); do
       [[ $VERBOSE ]] && {
-        echo "   Deleting" ${SNAPS[$i]}
+        echo "   Deleting" $MOUNT_POINT${SNAPS[$i]}
         }
       [[ ! $SAFE_MODE ]] && {
-        btrfs subvolume delete "${SNAPS[$i]}" || return 1
+        btrfs subvolume delete "$MOUNT_POINT${SNAPS[$i]}" || return 1
         }
     done
 
